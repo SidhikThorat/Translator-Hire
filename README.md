@@ -3,7 +3,9 @@
 A web-based platform that connects clients with professional human translators. The system supports dual login for Translators and Clients, enabling seamless hiring, request management, and communication.
 
 🚀 Features - 
+
 🔐 Dual Login System: Separate registration and login for Clients and Translators.
+
 👁️ Client Dashboard:
 
 Browse available human translators.
