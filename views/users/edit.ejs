@@ -1,0 +1,144 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Edit Profile</h2>
+                    <form action="/users/edit" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" value="<%= user.username %>" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="<%= user.phone %>" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="country" class="form-label">Country</label>
+                                    <input type="text" class="form-control" id="country" name="country" value="<%= user.country %>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">City/Location</label>
+                                    <input type="text" class="form-control" id="location" name="location" value="<%= user.location %>" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" id="gender" name="gender" required>
+                                        <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                                        <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                                        <option value="Other" <%= user.gender === 'Other' ? 'selected' : '' %>>Other</option>
+                                        <option value="Prefer not to say" <%= user.gender === 'Prefer not to say' ? 'selected' : '' %>>Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="age" min="18" max="100" value="<%= user.age %>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="charges" class="form-label">Hourly Rate ($)</label>
+                                    <input type="number" class="form-control" id="charges" name="charges" min="0" step="0.01" value="<%= user.charges %>" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="languages" class="form-label">Languages You Can Translate</label>
+                            <select class="form-select" id="languages" name="languages" multiple required>
+                                <% const userLanguages = user.languages || []; %>
+                                <option value="English" <%= userLanguages.includes('English') ? 'selected' : '' %>>English</option>
+                                <option value="Spanish" <%= userLanguages.includes('Spanish') ? 'selected' : '' %>>Spanish</option>
+                                <option value="French" <%= userLanguages.includes('French') ? 'selected' : '' %>>French</option>
+                                <option value="German" <%= userLanguages.includes('German') ? 'selected' : '' %>>German</option>
+                                <option value="Italian" <%= userLanguages.includes('Italian') ? 'selected' : '' %>>Italian</option>
+                                <option value="Portuguese" <%= userLanguages.includes('Portuguese') ? 'selected' : '' %>>Portuguese</option>
+                                <option value="Russian" <%= userLanguages.includes('Russian') ? 'selected' : '' %>>Russian</option>
+                                <option value="Japanese" <%= userLanguages.includes('Japanese') ? 'selected' : '' %>>Japanese</option>
+                                <option value="Chinese" <%= userLanguages.includes('Chinese') ? 'selected' : '' %>>Chinese</option>
+                                <option value="Arabic" <%= userLanguages.includes('Arabic') ? 'selected' : '' %>>Arabic</option>
+                                <option value="Hindi" <%= userLanguages.includes('Hindi') ? 'selected' : '' %>>Hindi</option>
+                                <option value="Bengali" <%= userLanguages.includes('Bengali') ? 'selected' : '' %>>Bengali</option>
+                                <option value="Punjabi" <%= userLanguages.includes('Punjabi') ? 'selected' : '' %>>Punjabi</option>
+                                <option value="Urdu" <%= userLanguages.includes('Urdu') ? 'selected' : '' %>>Urdu</option>
+                                <option value="Gujarati" <%= userLanguages.includes('Gujarati') ? 'selected' : '' %>>Gujarati</option>
+                                <option value="Marathi" <%= userLanguages.includes('Marathi') ? 'selected' : '' %>>Marathi</option>
+                                <option value="Tamil" <%= userLanguages.includes('Tamil') ? 'selected' : '' %>>Tamil</option>
+                                <option value="Telugu" <%= userLanguages.includes('Telugu') ? 'selected' : '' %>>Telugu</option>
+                                <option value="Kannada" <%= userLanguages.includes('Kannada') ? 'selected' : '' %>>Kannada</option>
+                                <option value="Malayalam" <%= userLanguages.includes('Malayalam') ? 'selected' : '' %>>Malayalam</option>
+                            </select>
+                            <div class="form-text">Hold Ctrl (Windows) or Command (Mac) to select multiple languages</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="experience" class="form-label">Years of Experience</label>
+                            <input type="number" class="form-control" id="experience" name="experience" min="0" value="<%= user.experience %>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">Bio/Introduction</label>
+                            <textarea class="form-control" id="bio" name="bio" rows="3" required><%= user.bio %></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="profileImage" class="form-label">Profile Image</label>
+                            <input type="file" class="form-control" id="profileImage" name="profileImage" accept="image/*">
+                            <div class="form-text">Current image: <img src="<%= user.profileImage %>" alt="Profile" style="width: 50px; height: 50px; object-fit: cover;"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="introVideo" class="form-label">Introduction Video (Optional)</label>
+                            <input type="file" class="form-control" id="introVideo" name="introVideo" accept="video/*">
+                            <% if (user.introVideo) { %>
+                                <div class="form-text">Current video: <a href="<%= user.introVideo %>" target="_blank">View Video</a></div>
+                            <% } %>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                            <a href="/users/dashboard" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %> 

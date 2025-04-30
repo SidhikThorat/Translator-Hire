@@ -1,0 +1,121 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Client Sign Up</h4>
+                </div>
+                <div class="card-body">
+                    <% if (typeof error !== 'undefined' && error.length > 0) { %>
+                        <div class="alert alert-danger">
+                            <%= error %>
+                        </div>
+                    <% } %>
+                    
+                    <form action="/client/signup" method="POST" id="signupForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" value="<%= typeof email !== 'undefined' ? email : '' %>" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="age" name="age" min="18" max="100" value="<%= typeof age !== 'undefined' ? age : '' %>" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" value="<%= typeof location !== 'undefined' ? location : '' %>" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" id="country" name="country" value="<%= typeof country !== 'undefined' ? country : '' %>" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="budget" class="form-label">Monthly Translation Budget (USD)</label>
+                                <input type="number" class="form-control" id="budget" name="budget" min="0" value="<%= typeof budget !== 'undefined' ? budget : '' %>" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="company" class="form-label">Company (Optional)</label>
+                            <input type="text" class="form-control" id="company" name="company" value="<%= typeof company !== 'undefined' ? company : '' %>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="preferredLanguages" class="form-label">Preferred Languages</label>
+                            <select class="form-select" id="preferredLanguages" name="preferredLanguages" multiple required>
+                                <option value="english" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('english') ? 'selected' : '' %>>English</option>
+                                <option value="hindi" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('hindi') ? 'selected' : '' %>>Hindi</option>
+                                <option value="marathi" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('marathi') ? 'selected' : '' %>>Marathi</option>
+                                <option value="sanskrit" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('sanskrit') ? 'selected' : '' %>>Sanskrit</option>
+                                <option value="punjabi" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('punjabi') ? 'selected' : '' %>>Punjabi</option>
+                                <option value="kannada" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('kannada') ? 'selected' : '' %>>Kannada</option>
+                                <option value="gujarati" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('gujarati') ? 'selected' : '' %>>Gujarati</option>
+                                <option value="assamese" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('assamese') ? 'selected' : '' %>>Assamese</option>
+                                <option value="bengali" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('bengali') ? 'selected' : '' %>>Bengali</option>
+                                <option value="malayalam" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('malayalam') ? 'selected' : '' %>>Malayalam</option>
+                                <option value="tamil" <%= typeof preferredLanguages !== 'undefined' && preferredLanguages.includes('tamil') ? 'selected' : '' %>>Tamil</option>
+                            </select>
+                            <div class="form-text">Hold Ctrl (Windows) or Command (Mac) to select multiple languages</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" name="address" rows="2"><%= typeof address !== 'undefined' ? address : '' %></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger">Sign Up</button>
+                            <a href="/client/login" class="btn btn-outline-secondary">Already have an account? Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    if (password !== confirmPassword) {
+        e.preventDefault();
+        alert('Passwords do not match!');
+        return false;
+    }
+    
+    const preferredLanguages = document.getElementById('preferredLanguages');
+    if (preferredLanguages.selectedOptions.length === 0) {
+        e.preventDefault();
+        alert('Please select at least one preferred language');
+        return false;
+    }
+});
+</script>
+
+<%- include('../partials/footer') %> 

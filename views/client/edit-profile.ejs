@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Translator Hire</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-danger text-white">
+                        <h3 class="mb-0">Edit Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <% if(locals.error) { %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= error %>
+                            </div>
+                        <% } %>
+                        <% if(locals.success) { %>
+                            <div class="alert alert-success" role="alert">
+                                <%= success %>
+                            </div>
+                        <% } %>
+                        
+                        <form action="/client/profile?_method=PUT" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<%= client.name %>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="age" name="age" value="<%= client.age %>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" value="<%= client.location %>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="country" class="form-label">Country</label>
+                                <select class="form-select" id="country" name="country" required>
+                                    <option value="">Select a country</option>
+                                    <option value="India" <%= client.country === 'India' ? 'selected' : '' %>>India</option>
+                                    <option value="america" <%= client.country === 'america' ? 'selected' : '' %>>America</option>
+                                    <option value="japan" <%= client.country === 'japan' ? 'selected' : '' %>>Japan</option>
+                                    <option value="us" <%= client.country === 'us' ? 'selected' : '' %>>US</option>
+                                    <option value="uk" <%= client.country === 'uk' ? 'selected' : '' %>>UK</option>
+                                    <option value="germany" <%= client.country === 'germany' ? 'selected' : '' %>>Germany</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="company" class="form-label">Company (Optional)</label>
+                                <input type="text" class="form-control" id="company" name="company" value="<%= client.company || '' %>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone (Optional)</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" value="<%= client.phone || '' %>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="preferredLanguages" class="form-label">Preferred Languages</label>
+                                <select class="form-select" id="preferredLanguages" name="preferredLanguages" multiple required>
+                                    <option value="hindi" <%= client.preferredLanguages.includes('hindi') ? 'selected' : '' %>>Hindi</option>
+                                    <option value="english" <%= client.preferredLanguages.includes('english') ? 'selected' : '' %>>English</option>
+                                    <option value="marathi" <%= client.preferredLanguages.includes('marathi') ? 'selected' : '' %>>Marathi</option>
+                                    <option value="sanskrit" <%= client.preferredLanguages.includes('sanskrit') ? 'selected' : '' %>>Sanskrit</option>
+                                    <option value="punjabi" <%= client.preferredLanguages.includes('punjabi') ? 'selected' : '' %>>Punjabi</option>
+                                    <option value="kannada" <%= client.preferredLanguages.includes('kannada') ? 'selected' : '' %>>Kannada</option>
+                                    <option value="gujarati" <%= client.preferredLanguages.includes('gujarati') ? 'selected' : '' %>>Gujarati</option>
+                                    <option value="assamese" <%= client.preferredLanguages.includes('assamese') ? 'selected' : '' %>>Assamese</option>
+                                    <option value="bengali" <%= client.preferredLanguages.includes('bengali') ? 'selected' : '' %>>Bengali</option>
+                                    <option value="malayalam" <%= client.preferredLanguages.includes('malayalam') ? 'selected' : '' %>>Malayalam</option>
+                                    <option value="tamil" <%= client.preferredLanguages.includes('tamil') ? 'selected' : '' %>>Tamil</option>
+                                </select>
+                                <small class="text-muted">Hold Ctrl/Cmd to select multiple languages</small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="budget" class="form-label">Monthly Budget ($)</label>
+                                <input type="number" class="form-control" id="budget" name="budget" value="<%= client.budget %>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address (Optional)</label>
+                                <textarea class="form-control" id="address" name="address" rows="3"><%= client.address || '' %></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-danger">Update Profile</button>
+                                <a href="/client/dashboard" class="btn btn-outline-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

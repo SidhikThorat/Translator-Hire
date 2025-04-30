@@ -1,0 +1,103 @@
+<%- include('../../partials/header') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Create New Project</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/client/projects" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Project Title</label>
+                            <input type="text" class="form-control" id="title" name="project[title]" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Project Description</label>
+                            <textarea class="form-control" id="description" name="project[description]" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="sourceLanguage" class="form-label">Source Language</label>
+                                <select class="form-select" id="sourceLanguage" name="project[sourceLanguage]" required>
+                                    <option value="">Select Source Language</option>
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                    <option value="it">Italian</option>
+                                    <option value="pt">Portuguese</option>
+                                    <option value="ru">Russian</option>
+                                    <option value="zh">Chinese</option>
+                                    <option value="ja">Japanese</option>
+                                    <option value="ko">Korean</option>
+                                    <option value="ar">Arabic</option>
+                                    <option value="hi">Hindi</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="targetLanguage" class="form-label">Target Language</label>
+                                <select class="form-select" id="targetLanguage" name="project[targetLanguage]" required>
+                                    <option value="">Select Target Language</option>
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                    <option value="it">Italian</option>
+                                    <option value="pt">Portuguese</option>
+                                    <option value="ru">Russian</option>
+                                    <option value="zh">Chinese</option>
+                                    <option value="ja">Japanese</option>
+                                    <option value="ko">Korean</option>
+                                    <option value="ar">Arabic</option>
+                                    <option value="hi">Hindi</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Project Category</label>
+                            <select class="form-select" id="category" name="project[category]" required>
+                                <option value="">Select Category</option>
+                                <option value="document">Document Translation</option>
+                                <option value="website">Website Translation</option>
+                                <option value="video">Video Translation</option>
+                                <option value="audio">Audio Translation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="files" class="form-label">Project Files</label>
+                            <input type="file" class="form-control" id="files" name="files" multiple>
+                            <div class="form-text">You can upload multiple files. Supported formats: PDF, DOC, DOCX, TXT, etc.</div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="budget" class="form-label">Budget (USD)</label>
+                                <input type="number" class="form-control" id="budget" name="project[budget]" min="0" step="0.01" required>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="deadline" class="form-label">Deadline</label>
+                                <input type="date" class="form-control" id="deadline" name="project[deadline]" required>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger">Create Project</button>
+                            <a href="/client/dashboard" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %> 

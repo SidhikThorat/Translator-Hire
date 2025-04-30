@@ -1,0 +1,145 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Profile Section -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">My Profile</h3>
+                    <div class="text-center mb-3">
+                        <% if (user.profileImage) { %>
+                            <img src="<%= user.profileImage %>" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" alt="Profile Image">
+                        <% } else { %>
+                            <img src="/images/default-profile.png" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" alt="Default Profile Image">
+                        <% } %>
+                    </div>
+                    <h4><%= user.name %></h4>
+                    <p><strong>Email:</strong> <%= user.email %></p>
+                    <p><strong>Phone:</strong> <%= user.phone %></p>
+                    <p><strong>Location:</strong> <%= user.location %>, <%= user.country %></p>
+                    <p><strong>Gender:</strong> <%= user.gender %></p>
+                    <p><strong>Age:</strong> <%= user.age %></p>
+                    <p><strong>Languages:</strong> <%= user.languages.join(', ') %></p>
+                    <p><strong>Experience:</strong> <%= user.experience %> years</p>
+                    <p><strong>Hourly Rate:</strong> $<%= user.charges %></p>
+                    <p><strong>Bio:</strong> <%= user.bio %></p>
+                    
+                    <% if (user.introVideo) { %>
+                        <div class="mt-3">
+                            <h5>Introduction Video</h5>
+                            <div class="ratio ratio-16x9">
+                                <video controls class="rounded">
+                                    <source src="<%= user.introVideo %>" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    <% } %>
+                    
+                    <a href="/users/edit" class="btn btn-primary mt-3">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hiring Requests Section -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Hiring Requests</h3>
+                    <% if (hiringRequests && hiringRequests.length > 0) { %>
+                        <% hiringRequests.forEach(request => { %>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5>Request from <%= request.client.name %></h5>
+                                    <p><strong>Project:</strong> <%= request.projectDetails %></p>
+                                    <p><strong>Status:</strong> 
+                                        <span class="badge <%= request.status === 'pending' ? 'bg-warning' : 
+                                                          request.status === 'accepted' ? 'bg-success' : 'bg-danger' %>">
+                                            <%= request.status %>
+                                        </span>
+                                    </p>
+                                    <% if (request.status === 'pending') { %>
+                                        <div class="btn-group">
+                                            <form action="/requests/<%= request._id %>/accept" method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-success">Accept</button>
+                                            </form>
+                                            <form action="/requests/<%= request._id %>/reject" method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-danger">Reject</button>
+                                            </form>
+                                        </div>
+                                    <% } else if (request.status === 'accepted' && !request.completed) { %>
+                                        <form action="/requests/<%= request._id %>/complete" method="POST">
+                                            <button type="submit" class="btn btn-primary">Mark as Completed</button>
+                                        </form>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="alert alert-info">
+                            <p class="mb-0">No hiring requests at the moment.</p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Active Projects Section -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Active Projects</h3>
+                    <% if (activeProjects && activeProjects.length > 0) { %>
+                        <% activeProjects.forEach(project => { %>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5>Project with <%= project.client.name %></h5>
+                                    <p><strong>Details:</strong> <%= project.projectDetails %></p>
+                                    <p><strong>Started on:</strong> <%= new Date(project.createdAt).toLocaleDateString() %></p>
+                                    <form action="/requests/<%= project._id %>/complete" method="POST">
+                                        <button type="submit" class="btn btn-primary">Mark as Completed</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="alert alert-info">
+                            <p class="mb-0">No active projects at the moment.</p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Past Work Section -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Past Work</h3>
+                    <% if (pastWork && pastWork.length > 0) { %>
+                        <% pastWork.forEach(work => { %>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5>Client: <%= work.client.name %></h5>
+                                    <p><strong>Project:</strong> <%= work.projectDetails %></p>
+                                    <p><strong>Completed on:</strong> <%= new Date(work.completedAt).toLocaleDateString() %></p>
+                                    <% if (work.rating) { %>
+                                        <p><strong>Rating:</strong> 
+                                            <% for(let i = 0; i < 5; i++) { %>
+                                                <i class="fas fa-star <%= i < work.rating ? 'text-warning' : 'text-muted' %>"></i>
+                                            <% } %>
+                                        </p>
+                                        <p><strong>Review:</strong> <%= work.review %></p>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="alert alert-info">
+                            <p class="mb-0">No past work history.</p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %> 

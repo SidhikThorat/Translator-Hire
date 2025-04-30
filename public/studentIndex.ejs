@@ -1,0 +1,124 @@
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #fe424d, #ff7b54);
+        color: white;
+        padding: 100px 0;
+        margin-bottom: 50px;
+    }
+
+    .card {
+        border: none;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        background-color: #fe424d;
+        border-color: #fe424d;
+    }
+
+    .btn-primary:hover {
+        background-color: #e63b45;
+        border-color: #e63b45;
+    }
+
+    .filter-form {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+
+
+<% layout("/layouts/boilerplate") %>
+
+
+    <div class="hero-section text-center">
+        <h1 class="display-4 fw-bold">Welcome to WouldTrans</h1>
+        <p class="lead">Connect with Corporate translators who can translate English Books into Native Languages</p>
+    </div>
+
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 offset-lg-2">
+                <form action="/students/filter" method="GET" class="filter-form p-4" data-aos="fade-up">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" id="country" name="country" placeholder="Country" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="location" name="location" placeholder="Location"
+                                class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" id="minCharges" name="minCharges" placeholder="Min Charges"
+                                class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" id="maxCharges" name="maxCharges" placeholder="Max Charges"
+                                class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <select id="gender" name="gender" class="form-select">
+                                <option value="">All Genders</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search me-2"></i>Filter Results
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <h2 class="mb-4 text-center">Our Students</h2>
+        <div class="row" id="listingsContainer">
+            <% for(let student of allStudents) { %>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                    <a href="/students/<%= student._id %>" class="text-decoration-none">
+                        <div class="card h-100">
+                            <img src="<%= student.profilepic.url %>" class="card-img-top" alt="<%= student.name %>"
+                                style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= student.name %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= student.description %>
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        <%= student.country %>
+                                            <i class="fas fa-coins ms-3 me-2"></i>Charges: <%= student.charges %>
+                                                <i class="fas fa-user ms-3 me-2"></i>
+                                                <%= student.gender %>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <% } %>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>

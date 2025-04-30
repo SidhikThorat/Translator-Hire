@@ -1,0 +1,62 @@
+<%- include("../includes/header.ejs") %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Client Sign Up</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/client/signup" method="POST">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="clientUser[name]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="age" name="clientUser[age]" min="18" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" name="clientUser[location]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" id="country" name="clientUser[country]" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="preferredLanguages" class="form-label">Preferred Languages (comma separated)</label>
+                            <input type="text" class="form-control" id="preferredLanguages" name="clientUser[preferredLanguages]" required>
+                            <small class="text-muted">Example: English, Spanish, French</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="budget" class="form-label">Budget (per hour)</label>
+                            <input type="number" class="form-control" id="budget" name="clientUser[budget]" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </div>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <p>Already have an account? <a href="/client/login">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../includes/footer.ejs") %> 

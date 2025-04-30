@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator Hire</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#dc3545">
+    <meta name="msapplication-TileColor" content="#dc3545">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <style>
+        .navbar {
+            background-color: white !important;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            color: #dc3545 !important;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            color: #c82333 !important;
+        }
+        .logo-img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .contact-btn {
+            background-color: #dc3545;
+            color: white !important;
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #dc3545;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-btn:hover {
+            background: linear-gradient(45deg, #4a6bff, #8a2be2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 107, 255, 0.4);
+            color: white !important;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+        .navbar-toggler {
+            border-color: #dc3545;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28220, 53, 69, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        .alert {
+            margin-top: 1rem;
+        }
+        .translator-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .translator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        .translator-card img {
+            transition: transform 0.3s ease;
+        }
+        .translator-card:hover img {
+            transform: scale(1.05);
+        }
+        .translator-card .card-body {
+            padding: 1.5rem;
+        }
+        .translator-card .btn {
+            border-radius: 25px;
+            padding: 8px 16px;
+        }
+        .translator-card .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .g-4 {
+            --bs-gutter-x: 2rem;
+            --bs-gutter-y: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/logophoto.png" alt="Translator Hire Logo" class="logo-img">
+                Translator Hire
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link contact-btn" href="#footer">
+                            <i class="fas fa-envelope me-2"></i>Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        <% if(locals.success) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= locals.success %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <% } %>
+        <% if(locals.error) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= locals.error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Profile Section -->
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0">Profile Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <img src="<%= client.profileImage || '/images/default-profile.png' %>" alt="Profile Image" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-1">Full Name</h6>
+                            <p class="mb-0"><%= client.name %></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-1">Email</h6>
+                            <p class="mb-0"><%= client.email %></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-1">Location</h6>
+                            <p class="mb-0"><%= client.location %>, <%= client.country %></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-1">Company</h6>
+                            <p class="mb-0"><%= client.company || 'Not specified' %></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-1">Phone</h6>
+                            <p class="mb-0"><%= client.phone || 'Not specified' %></p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-1">Address</h6>
+                            <p class="mb-0"><%= client.address || 'Not specified' %></p>
+                        </div>
+                        <div class="d-grid">
+                            <a href="/client/profile/edit" class="btn btn-outline-danger">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Section -->
+            <div class="col-md-8">
+                <!-- Hiring Requests -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0">Hiring Requests</h5>
+                    </div>
+                    <div class="card-body">
+                        <% if(hiringRequests && hiringRequests.length > 0) { %>
+                            <div class="list-group">
+                                <% hiringRequests.forEach(request => { %>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">Translator: <%= request.translator ? request.translator.name : 'Unknown' %></h6>
+                                                <p class="mb-1"><strong>Project:</strong> <%= request.title %></p>
+                                                <p class="mb-1"><strong>Description:</strong> <%= request.description %></p>
+                                                <p class="mb-1">
+                                                    <strong>Source Language:</strong> <%= request.sourceLanguage %> | 
+                                                    <strong>Target Language:</strong> <%= request.targetLanguage %>
+                                                </p>
+                                                <p class="mb-1">
+                                                    <strong>Budget:</strong> $<%= request.budget %> | 
+                                                    <strong>Deadline:</strong> <%= new Date(request.deadline).toLocaleDateString() %>
+                                                </p>
+                                                <small class="text-muted">Requested on: <%= new Date(request.createdAt).toLocaleDateString() %></small>
+                                            </div>
+                                            <div class="text-end">
+                                                <span class="badge bg-<%= request.status === 'accepted' ? 'success' : 
+                                                                      request.status === 'rejected' ? 'danger' : 
+                                                                      request.status === 'completed' ? 'info' : 'warning' %> mb-2">
+                                                    <%= request.status.charAt(0).toUpperCase() + request.status.slice(1) %>
+                                                </span>
+                                                <% if(request.status === 'accepted') { %>
+                                                    <p class="text-success mb-0">
+                                                        <small>Accepted on: <%= new Date(request.acceptedAt).toLocaleDateString() %></small>
+                                                    </p>
+                                                    <a href="/client/projects/<%= request._id %>" class="btn btn-success btn-sm mt-2">View Project</a>
+                                                <% } else if(request.status === 'rejected') { %>
+                                                    <p class="text-danger mb-0">
+                                                        <small>Rejected on: <%= new Date(request.rejectedAt).toLocaleDateString() %></small>
+                                                    </p>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        <% } else { %>
+                            <p class="text-center text-muted">No hiring requests at the moment.</p>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- Completed Projects -->
+                <% if(completedProjects && completedProjects.length > 0) { %>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Completed Projects</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <% completedProjects.forEach(project => { %>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">Translator: <%= project.translator ? project.translator.name : 'Unknown' %></h6>
+                                                <p class="mb-1"><strong>Project:</strong> <%= project.title %></p>
+                                                <p class="mb-1"><strong>Completed on:</strong> <%= new Date(project.completedAt).toLocaleDateString() %></p>
+                                            </div>
+                                            <div class="text-end">
+                                                <span class="badge bg-info mb-2">Completed</span>
+                                                <% if(project.rating) { %>
+                                                    <div class="text-warning">
+                                                        <% for(let i = 1; i <= 5; i++) { %>
+                                                            <% if(i <= project.rating) { %>
+                                                                <i class="fas fa-star"></i>
+                                                            <% } else { %>
+                                                                <i class="far fa-star"></i>
+                                                            <% } %>
+                                                        <% } %>
+                                                    </div>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+                <!-- Available Translators -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0">Available Translators</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="translatorsList" class="row row-cols-1 row-cols-md-2 g-4">
+                            <% if (translators && translators.length > 0) { %>
+                                <% translators.forEach(translator => { %>
+                                    <div class="col translator-card" data-country="<%= translator.country %>">
+                                        <div class="card h-100 shadow-sm">
+                                            <img src="<%= translator.profileImage %>" class="card-img-top" alt="<%= translator.name %>">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><%= translator.name %></h5>
+                                                <p class="text-muted">
+                                                    <i class="fas fa-map-marker-alt"></i> <%= translator.location %>, <%= translator.country %>
+                                                </p>
+                                                <div class="mb-3">
+                                                    <h6>Languages</h6>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <% translator.languages.forEach(language => { %>
+                                                            <span class="badge bg-primary"><%= language %></span>
+                                                        <% }); %>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <h6>Rate</h6>
+                                                    <p>$<%= translator.charges %> per hour</p>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="text-warning">
+                                                        <% for(let i = 0; i < 5; i++) { %>
+                                                            <% if (i < translator.rating) { %>
+                                                                <i class="fas fa-star"></i>
+                                                            <% } else { %>
+                                                                <i class="far fa-star"></i>
+                                                            <% } %>
+                                                        <% } %>
+                                                    </div>
+                                                    <a href="/client/translator/<%= translator._id %>" class="btn btn-danger">View Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            <% } else { %>
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        No translators available at the moment.
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-danger text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Translator Hire connects businesses with professional translators worldwide. Our platform makes it easy to find the perfect translator for your needs.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="/" class="footer-btn">
+                                <i class="fas fa-home me-2"></i>Home
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/about" class="footer-btn">
+                                <i class="fas fa-info-circle me-2"></i>About Us
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/terms" class="footer-btn">
+                                <i class="fas fa-file-contract me-2"></i>Terms and Conditions
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/manual" class="footer-btn">
+                                <i class="fas fa-book me-2"></i>User Manual
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Social</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                                <i class="fab fa-facebook me-2"></i>Facebook
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                                <i class="fab fa-twitter me-2"></i>Twitter
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                                <i class="fab fa-linkedin me-2"></i>LinkedIn
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                                <i class="fab fa-instagram me-2"></i>Instagram
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2024 Translator Hire. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <style>
+        .footer-btn {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-btn:hover {
+            background: linear-gradient(45deg, #4a6bff, #8a2be2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 107, 255, 0.4);
+            color: white !important;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .footer-btn:hover::before {
+            left: 100%;
+        }
+
+        .footer-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .footer-btn:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Add a subtle pulse animation for social media buttons */
+        .footer-btn.social:hover {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 107, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(74, 107, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 107, 255, 0);
+            }
+        }
+    </style>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/main.js"></script>
+    <script>
+        // Handle hire button clicks
+        document.querySelectorAll('.hire-btn').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const translatorId = e.currentTarget.dataset.translatorId;
+                try {
+                    const response = await fetch('/client/hire', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ translatorId })
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        alert('Translator hired successfully!');
+                        location.reload();
+                    } else {
+                        alert(data.error || 'Failed to hire translator');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to hire translator');
+                }
+            });
+        });
+
+        // Handle filters
+        function applyFilters() {
+            const country = document.getElementById('countryFilter').value;
+            const language = document.getElementById('languageFilter').value;
+            
+            document.querySelectorAll('.translator-card').forEach(card => {
+                const matchCountry = !country || card.dataset.country === country;
+                const matchLanguage = !language || card.dataset.language === language;
+                
+                if (matchCountry && matchLanguage) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show "no results" message if all cards are hidden
+            const visibleCards = document.querySelectorAll('.translator-card[style=""]').length;
+            const noResultsMsg = document.getElementById('noResultsMsg');
+            
+            if (visibleCards === 0) {
+                if (!noResultsMsg) {
+                    const msg = document.createElement('div');
+                    msg.id = 'noResultsMsg';
+                    msg.className = 'col-12';
+                    msg.innerHTML = '<p class="text-center text-muted">No translators found matching your filters.</p>';
+                    document.getElementById('translatorsList').appendChild(msg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+
+        // Add event listeners to filters
+        document.getElementById('countryFilter').addEventListener('change', applyFilters);
+        document.getElementById('languageFilter').addEventListener('change', applyFilters);
+    </script>
+</body>
+</html> 

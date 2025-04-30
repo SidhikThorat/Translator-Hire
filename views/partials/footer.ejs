@@ -1,0 +1,133 @@
+<footer class="bg-danger text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About Us</h5>
+                <p>Translator Hire connects businesses with professional translators worldwide. Our platform makes it easy to find the perfect translator for your needs.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="/" class="footer-btn">
+                            <i class="fas fa-home me-2"></i>Home
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/about" class="footer-btn">
+                            <i class="fas fa-info-circle me-2"></i>About Us
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/terms" class="footer-btn">
+                            <i class="fas fa-file-contract me-2"></i>Terms and Conditions
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/manual" class="footer-btn">
+                            <i class="fas fa-book me-2"></i>User Manual
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Social</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                            <i class="fab fa-facebook me-2"></i>Facebook
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                            <i class="fab fa-twitter me-2"></i>Twitter
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                            <i class="fab fa-linkedin me-2"></i>LinkedIn
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-btn social">
+                            <i class="fab fa-instagram me-2"></i>Instagram
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr class="my-4 bg-white">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-0">&copy; 2025 Translator Hire. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<style>
+    .footer-btn {
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white !important;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 25px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .footer-btn:hover {
+        background: linear-gradient(45deg, #4a6bff, #8a2be2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(74, 107, 255, 0.4);
+        color: white !important;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .footer-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent
+        );
+        transition: 0.5s;
+    }
+
+    .footer-btn:hover::before {
+        left: 100%;
+    }
+
+    .footer-btn i {
+        transition: transform 0.3s ease;
+    }
+
+    .footer-btn:hover i {
+        transform: scale(1.2);
+    }
+
+    /* Add a subtle pulse animation for social media buttons */
+    .footer-btn.social:hover {
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(74, 107, 255, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(74, 107, 255, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(74, 107, 255, 0);
+        }
+    }
+</style> 

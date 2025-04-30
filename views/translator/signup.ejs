@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator Signup - Translator Hire</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-danger text-white">
+                        <h3 class="mb-0">Translator Sign Up</h3>
+                    </div>
+                    <div class="card-body">
+                        <% if(locals.error) { %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= error %>
+                            </div>
+                        <% } %>
+                        
+                        <form action="/translator/signup" method="POST">
+                            <!-- Basic Information -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="contact" class="form-label">Contact Number (with 91 prefix)</label>
+                                    <input type="text" class="form-control" id="contact" name="contact" pattern="^91\d{10}$" placeholder="91XXXXXXXXXX" required>
+                                    <div class="form-text">Enter 12 digits starting with 91</div>
+                                </div>
+                            </div>
+
+                            <!-- Personal Information -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="age" min="18" max="100" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" id="gender" name="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                        <option value="Prefer not to say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="location" class="form-label">City/Location</label>
+                                    <input type="text" class="form-control" id="location" name="location" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="country" class="form-label">Country</label>
+                                    <select class="form-select" id="country" name="country" required>
+                                        <option value="">Select Country</option>
+                                        <option value="India">India</option>
+                                        <option value="america">America</option>
+                                        <option value="japan">Japan</option>
+                                        <option value="us">US</option>
+                                        <option value="uk">UK</option>
+                                        <option value="germany">Germany</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Professional Information -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="charges" class="form-label">Hourly Rate (₹)</label>
+                                    <input type="number" class="form-control" id="charges" name="charges" min="0" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="experience" class="form-label">Years of Experience</label>
+                                    <input type="number" class="form-control" id="experience" name="experience" min="0" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Primary Translation Language</label>
+                                <select class="form-select" id="category" name="category" required>
+                                    <option value="">Select Primary Language</option>
+                                    <option value="hindi">Hindi</option>
+                                    <option value="english">English</option>
+                                    <option value="marathi">Marathi</option>
+                                    <option value="sanskrit">Sanskrit</option>
+                                    <option value="punjabi">Punjabi</option>
+                                    <option value="kannada">Kannada</option>
+                                    <option value="gujarati">Gujarati</option>
+                                    <option value="assamese">Assamese</option>
+                                    <option value="bengali">Bengali</option>
+                                    <option value="malayalam">Malayalam</option>
+                                    <option value="tamil">Tamil</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Professional Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                                <div class="form-text">Describe your translation experience and expertise</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="profilepic" class="form-label">Profile Picture URL (Optional)</label>
+                                <input type="url" class="form-control" id="profilepic" name="profilepic">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="languagecpic" class="form-label">Language Certificate URL (Optional)</label>
+                                <input type="url" class="form-control" id="languagecpic" name="languagecpic">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-danger">Sign Up</button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <p>Already have an account? <a href="/translator/login" class="text-danger">Login</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

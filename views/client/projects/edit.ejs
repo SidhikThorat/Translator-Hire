@@ -1,0 +1,123 @@
+<%- include('../../partials/header') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Edit Project</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/client/projects/<%= project._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Project Title</label>
+                            <input type="text" class="form-control" id="title" name="project[title]" value="<%= project.title %>" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Project Description</label>
+                            <textarea class="form-control" id="description" name="project[description]" rows="4" required><%= project.description %></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="sourceLanguage" class="form-label">Source Language</label>
+                                <select class="form-select" id="sourceLanguage" name="project[sourceLanguage]" required>
+                                    <option value="">Select Source Language</option>
+                                    <option value="en" <%= project.sourceLanguage === 'en' ? 'selected' : '' %>>English</option>
+                                    <option value="es" <%= project.sourceLanguage === 'es' ? 'selected' : '' %>>Spanish</option>
+                                    <option value="fr" <%= project.sourceLanguage === 'fr' ? 'selected' : '' %>>French</option>
+                                    <option value="de" <%= project.sourceLanguage === 'de' ? 'selected' : '' %>>German</option>
+                                    <option value="it" <%= project.sourceLanguage === 'it' ? 'selected' : '' %>>Italian</option>
+                                    <option value="pt" <%= project.sourceLanguage === 'pt' ? 'selected' : '' %>>Portuguese</option>
+                                    <option value="ru" <%= project.sourceLanguage === 'ru' ? 'selected' : '' %>>Russian</option>
+                                    <option value="zh" <%= project.sourceLanguage === 'zh' ? 'selected' : '' %>>Chinese</option>
+                                    <option value="ja" <%= project.sourceLanguage === 'ja' ? 'selected' : '' %>>Japanese</option>
+                                    <option value="ko" <%= project.sourceLanguage === 'ko' ? 'selected' : '' %>>Korean</option>
+                                    <option value="ar" <%= project.sourceLanguage === 'ar' ? 'selected' : '' %>>Arabic</option>
+                                    <option value="hi" <%= project.sourceLanguage === 'hi' ? 'selected' : '' %>>Hindi</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="targetLanguage" class="form-label">Target Language</label>
+                                <select class="form-select" id="targetLanguage" name="project[targetLanguage]" required>
+                                    <option value="">Select Target Language</option>
+                                    <option value="en" <%= project.targetLanguage === 'en' ? 'selected' : '' %>>English</option>
+                                    <option value="es" <%= project.targetLanguage === 'es' ? 'selected' : '' %>>Spanish</option>
+                                    <option value="fr" <%= project.targetLanguage === 'fr' ? 'selected' : '' %>>French</option>
+                                    <option value="de" <%= project.targetLanguage === 'de' ? 'selected' : '' %>>German</option>
+                                    <option value="it" <%= project.targetLanguage === 'it' ? 'selected' : '' %>>Italian</option>
+                                    <option value="pt" <%= project.targetLanguage === 'pt' ? 'selected' : '' %>>Portuguese</option>
+                                    <option value="ru" <%= project.targetLanguage === 'ru' ? 'selected' : '' %>>Russian</option>
+                                    <option value="zh" <%= project.targetLanguage === 'zh' ? 'selected' : '' %>>Chinese</option>
+                                    <option value="ja" <%= project.targetLanguage === 'ja' ? 'selected' : '' %>>Japanese</option>
+                                    <option value="ko" <%= project.targetLanguage === 'ko' ? 'selected' : '' %>>Korean</option>
+                                    <option value="ar" <%= project.targetLanguage === 'ar' ? 'selected' : '' %>>Arabic</option>
+                                    <option value="hi" <%= project.targetLanguage === 'hi' ? 'selected' : '' %>>Hindi</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Project Category</label>
+                            <select class="form-select" id="category" name="project[category]" required>
+                                <option value="">Select Category</option>
+                                <option value="document" <%= project.category === 'document' ? 'selected' : '' %>>Document Translation</option>
+                                <option value="website" <%= project.category === 'website' ? 'selected' : '' %>>Website Translation</option>
+                                <option value="video" <%= project.category === 'video' ? 'selected' : '' %>>Video Translation</option>
+                                <option value="audio" <%= project.category === 'audio' ? 'selected' : '' %>>Audio Translation</option>
+                                <option value="other" <%= project.category === 'other' ? 'selected' : '' %>>Other</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Existing Files -->
+                        <% if(project.files && project.files.length > 0) { %>
+                            <div class="mb-3">
+                                <label class="form-label">Current Files</label>
+                                <div class="list-group">
+                                    <% project.files.forEach(file => { %>
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-0"><%= file.originalName %></h6>
+                                                    <small class="text-muted"><%= (file.size / 1024).toFixed(2) %> KB</small>
+                                                </div>
+                                                <a href="<%= file.url %>" class="btn btn-sm btn-outline-primary" target="_blank">View</a>
+                                            </div>
+                                        </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        <% } %>
+                        
+                        <div class="mb-3">
+                            <label for="files" class="form-label">Add More Files</label>
+                            <input type="file" class="form-control" id="files" name="files" multiple>
+                            <div class="form-text">You can upload additional files. Supported formats: PDF, DOC, DOCX, TXT, etc.</div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="budget" class="form-label">Budget (USD)</label>
+                                <input type="number" class="form-control" id="budget" name="project[budget]" value="<%= project.budget %>" min="0" step="0.01" required>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="deadline" class="form-label">Deadline</label>
+                                <input type="date" class="form-control" id="deadline" name="project[deadline]" value="<%= new Date(project.deadline).toISOString().split('T')[0] %>" required>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger">Update Project</button>
+                            <a href="/client/projects/<%= project._id %>" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %> 
